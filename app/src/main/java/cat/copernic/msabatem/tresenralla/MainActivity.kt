@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     var tablero = Array<Int>(9) {0};
     var playerTurno = true;
     var terminado = false;
+    var primer_turno = true;
 
     var combinacionGanadora = arrayOf(
         intArrayOf(0, 1, 2),
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         tablero = Array<Int>(9) {0};
         playerTurno = true;
         terminado = false;
+        primer_turno = true;
 
         for(i in buttonID){
             findViewById<Button>(i).setBackgroundResource(0);
@@ -200,7 +202,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        atacar();
+
+        if(primer_turno){
+            if(tablero[4] == PLAYER){
+                val esquinas = arrayOf(0,2,6,8);
+                while(!puesto){
+                    val r = Random.nextInt(0,4);
+                    tablero[r] = IA;
+                    findViewById<Button>(buttonID[r]).setBackgroundResource(R.drawable.ia_icon);
+                    puesto = true;
+                    primer_turno = false;
+                    break;
+                }
+            }else{
+                tablero[4] = IA;
+                findViewById<Button>(buttonID[4]).setBackgroundResource(R.drawable.ia_icon);
+                puesto = true;
+                primer_turno = false;
+            }
+
+        }
+
+        if(!puesto){
+            atacar();
+        }
         if(!puesto){
             proteger();
         }
@@ -213,6 +238,7 @@ class MainActivity : AppCompatActivity() {
                 if(tablero[r] == 0){
                     tablero[r] = IA;
                     findViewById<Button>(buttonID[r]).setBackgroundResource(R.drawable.ia_icon);
+                    puesto = true;
                     break;
                 }
             }
