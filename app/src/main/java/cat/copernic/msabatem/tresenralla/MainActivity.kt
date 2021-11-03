@@ -223,6 +223,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
         if(!puesto){
             atacar();
         }
