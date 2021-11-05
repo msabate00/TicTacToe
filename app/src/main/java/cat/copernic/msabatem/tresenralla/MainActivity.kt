@@ -11,10 +11,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import cat.copernic.msabatem.tresenralla.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(GameViewModel::class.java)
+    }
+
+
+    lateinit var binding: ActivityMainBinding;
     val IA = 1;
     val PLAYER = 2;
     var tablero = Array<Int>(9) {0};
@@ -22,7 +32,8 @@ class MainActivity : AppCompatActivity() {
     var terminado = false;
     var primer_turno = true;
 
-    var combinacionGanadora = arrayOf(
+
+    val combinacionGanadora = arrayOf(
         intArrayOf(0, 1, 2),
         intArrayOf(3, 4, 5),
         intArrayOf(6, 7, 8),
@@ -44,14 +55,33 @@ class MainActivity : AppCompatActivity() {
         R.id.b9
     )
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+        tablero = viewModel.tablero.value ?: Array<Int>(9){0};
+        terminado = viewModel.terminado.value ?: false;
+        primer_turno = viewModel.primerturno.value ?: true;
+        playerTurno = viewModel.playerturno.value ?: true;
+        mostrar();
 
 
-        findViewById<Button>(R.id.restart).setOnClickListener{
+        //binding.b1.setBackgroundResource(viewModel.btn1.value ?: R.drawable.none);
+        //viewModel.btn1.equals(R.drawable.player_icon);
+
+
+        binding.restart.setOnClickListener {
+            viewModel.reset();
             reset();
+            mostrar();
         }
+
+
 
     }
 
@@ -62,7 +92,6 @@ class MainActivity : AppCompatActivity() {
         //findViewById<Button>(R.id.b1);
 
         for(i in buttonID){
-
             findViewById<View>(i).setOnClickListener{
                 pulsacion(it);
             };
@@ -73,6 +102,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun mostrar(){
+        for(i in 0..8){
+
+            if(tablero[i] == PLAYER){
+                findViewById<Button>(buttonID[i]).setBackgroundResource(R.drawable.player_icon);
+            }else if (tablero[i] == IA){
+                findViewById<Button>(buttonID[i]).setBackgroundResource(R.drawable.ia_icon);
+            }else{
+                findViewById<Button>(buttonID[i]).setBackgroundResource(R.drawable.none);
+            }
+
+        }
+    }
+
+
     fun reset(){
         tablero = Array<Int>(9) {0};
         playerTurno = true;
@@ -80,7 +124,6 @@ class MainActivity : AppCompatActivity() {
         primer_turno = true;
 
         for(i in buttonID){
-            findViewById<Button>(i).setBackgroundResource(0);
             findViewById<Button>(i).setBackgroundResource(R.drawable.none);
         }
 
@@ -88,32 +131,34 @@ class MainActivity : AppCompatActivity() {
 
     fun pulsacion(view: View) {
 
-
+        Log.i("bucle",terminado.toString() + " _ " + viewModel.terminado.value.toString());
         if (playerTurno) {
 
-            var contador = 0;
-            for(i in buttonID){
-               // Log.i("Bucle", contador.toString())
-                if(i == view.id && tablero[contador] == 0){
-                    view.setBackgroundResource(R.drawable.player_icon);
-                    tablero[contador] = PLAYER;
-                    playerTurno = false;
-                    break;
+            if(!terminado) {
+                var contador = 0;
+                for (i in buttonID) {
+                    // Log.i("Bucle", contador.toString())
+                    if (i == view.id && tablero[contador] == 0) {
+                        view.setBackgroundResource(R.drawable.player_icon);
+                        tablero[contador] = PLAYER;
+                        playerTurno = false;
+                        viewModel.playerTurno(false);
+                        break;
+                    }
+
+                    contador++;
                 }
 
-                contador++;
-            }
 
+                if (!playerTurno) {
+                    comprobarGanador();
 
-            if(!playerTurno) {
-                comprobarGanador();
-
-                if(!terminado){
-                   // Log.i("Bucle", "salido")
-                    turnoIA();
+                    if (!terminado) {
+                        // Log.i("Bucle", "salido")
+                        turnoIA();
+                    }
                 }
             }
-
 
 
         }
@@ -212,6 +257,7 @@ class MainActivity : AppCompatActivity() {
                     findViewById<Button>(buttonID[r]).setBackgroundResource(R.drawable.ia_icon);
                     puesto = true;
                     primer_turno = false;
+                    viewModel.primerturno(false);
                     break;
                 }
             }else{
@@ -219,6 +265,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<Button>(buttonID[4]).setBackgroundResource(R.drawable.ia_icon);
                 puesto = true;
                 primer_turno = false;
+                viewModel.primerturno(false);
             }
 
         }
@@ -248,6 +295,7 @@ class MainActivity : AppCompatActivity() {
 
         if(!terminado) {
             playerTurno = true;
+            viewModel.playerTurno(true);
         }
     }
 
