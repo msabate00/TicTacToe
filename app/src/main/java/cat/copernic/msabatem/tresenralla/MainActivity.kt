@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                     newTablero -> tablero = newTablero;
                 }
             )
+
         viewModel.terminado.observe(this,
             Observer{
                     newTerminado -> terminado = newTerminado;
