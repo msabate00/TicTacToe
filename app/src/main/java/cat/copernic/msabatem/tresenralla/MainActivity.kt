@@ -80,10 +80,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.restart.setOnClickListener {
             viewModel.reset();
-            reset();
+            mostrar();
+           // reset();
 
         }
 
+
+        viewModel.tablero.observe(this,
+                {
+                    newTablero -> tablero = newTablero;
+                }
+            )
         viewModel.terminado.observe(this,
             Observer{
                     newTerminado -> terminado = newTerminado;
@@ -135,16 +142,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+/*
     fun reset(){
         tablero = viewModel.tablero.value ?: Array<Int>(9){0};
         terminado = viewModel.terminado.value ?: false;
         primer_turno = viewModel.primerturno.value ?: true;
         playerTurno = viewModel.playerturno.value ?: true;
         mostrar();
-
-
-    }
+    }*/
 
     fun pulsacion(view: View) {
 
