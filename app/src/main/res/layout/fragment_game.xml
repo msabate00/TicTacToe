@@ -14,18 +14,6 @@
         android:layout_margin="15dp"
         tools:context=".MainActivity">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView2"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/nav_graph" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
@@ -34,7 +22,6 @@
             android:text="TRES EN RALLA"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +31,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/b4"
             app:layout_constraintTop_toBottomOf="@+id/b4" />
 
@@ -53,7 +39,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/b1"
             app:layout_constraintTop_toBottomOf="@+id/b1" />
 
@@ -62,7 +47,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/b4"
             app:layout_constraintTop_toTopOf="@+id/b4" />
 
@@ -71,7 +55,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/b5"
             app:layout_constraintTop_toTopOf="@+id/b5" />
 
@@ -81,7 +64,6 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -91,7 +73,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/b2"
             app:layout_constraintTop_toTopOf="@+id/b2"
             app:rippleColor="#FFFFFF" />
@@ -101,7 +82,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/b8"
             app:layout_constraintTop_toBottomOf="@+id/b5" />
 
@@ -110,7 +90,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/b2"
             app:layout_constraintTop_toTopOf="@+id/b2" />
 
@@ -119,7 +98,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/none"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/b7"
             app:layout_constraintTop_toTopOf="@+id/b7" />
 
@@ -129,7 +107,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
             android:text="Reiniciar"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.907"
@@ -140,7 +117,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="by Martí Sabaté"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
