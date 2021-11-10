@@ -276,8 +276,9 @@ class MainActivity : AppCompatActivity() {
                 val esquinas = arrayOf(0,2,6,8);
                 while(!puesto){
                     val r = Random.nextInt(0,4);
-                    tablero[r] = IA;
-                    buttons[r].setBackgroundResource(R.drawable.ia_icon);
+                    Log.i("bucle",r.toString() + " __ " + esquinas[r])
+                    tablero[esquinas[r]] = IA;
+                    buttons[esquinas[r]].setBackgroundResource(R.drawable.ia_icon);
                     puesto = true;
                     primer_turno = false;
                     viewModel.primerturno(false);
