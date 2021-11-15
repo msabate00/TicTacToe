@@ -10,20 +10,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment
 import cat.copernic.msabatem.tresenralla.databinding.ActivityMainBinding
 import cat.copernic.msabatem.tresenralla.databinding.FragmentGameBinding
 import kotlin.random.Random
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameFragment : Fragment() {
 
 
@@ -97,6 +88,14 @@ class GameFragment : Fragment() {
             // reset();
 
         }
+
+
+        viewModel.eventGameFinish.observe(viewLifecycleOwner,
+            Observer {
+                    hasFinished -> if(hasFinished) gameFinished();
+            }
+
+        )
 
 
         viewModel.tablero.observe(viewLifecycleOwner,
@@ -359,6 +358,9 @@ class GameFragment : Fragment() {
             Toast.makeText(context, "HA SIDO EMPATE", Toast.LENGTH_LONG).show();
             terminado = true;
         }
+        if(terminado){
+            gameFinished();
+        }
 
 
         //return terminado;
@@ -369,6 +371,17 @@ class GameFragment : Fragment() {
     fun debug(a: Any){
         Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show();
     }
+
+    fun gameFinished(){
+        Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
+        val action = GameFragmentDirections.actionGameFragmentToEndFragment()
+        action.time = viewModel.currentTime.value ?: 0;
+        NavHostFragment.findNavController(this).navigate(action)
+        viewModel.onGameFinishComplete();
+    }
+
+
+
 
 
 }
