@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 
-class EndViewModelFactory(private val time: Long) : ViewModelProvider.Factory {
+class EndViewModelFactory(private val time: Long, private val ganador: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(EndViewModel::class.java)) {
-            return EndViewModel(time) as T
+            return EndViewModel(time, ganador) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

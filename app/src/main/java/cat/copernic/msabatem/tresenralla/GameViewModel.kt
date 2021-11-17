@@ -26,6 +26,9 @@ class GameViewModel : ViewModel() {
     private val _eventGameFinish = MutableLiveData<Boolean>(false);
     val eventGameFinish: LiveData<Boolean> = _eventGameFinish;
 
+    private val _ganador = MutableLiveData<Int>(0);
+    var ganador: LiveData<Int> = _ganador;
+
 
     private val _currentTime = MutableLiveData<Long>();
     val currentTime: LiveData<Long> = _currentTime;
@@ -38,10 +41,6 @@ class GameViewModel : ViewModel() {
 
     init {
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
-            /**
-             * Callback fired on regular interval.
-             * @param millisUntilFinished The amount of time until finished.
-             */
             override fun onTick(millisUntilFinished: Long) {
                 _currentTime.value = millisUntilFinished/ ONE_SECOND;
             }
@@ -59,10 +58,13 @@ class GameViewModel : ViewModel() {
     }
 
     fun reset(){
+        timer.cancel()
+        timer.start();
         _tablero.value = Array<Int>(9) {0};
         _playerturno.value = true;
         _terminado.value = false;
         _primerturno.value = true;
+        _ganador.value = 0;
     }
 
     fun primerturno(b: Boolean){
@@ -70,6 +72,10 @@ class GameViewModel : ViewModel() {
     }
     fun playerTurno(b: Boolean){
         _playerturno.value = b;
+    }
+
+    fun setGanador(i: Int){
+        _ganador.value = i;
     }
 
     fun onGameFinish(){

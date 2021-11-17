@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import cat.copernic.msabatem.tresenralla.databinding.FragmentEndBinding
 import cat.copernic.msabatem.tresenralla.databinding.FragmentGameBinding
 
@@ -29,12 +30,23 @@ class EndFragment : Fragment() {
             false
         )
         val time = EndFragmentArgs.fromBundle(requireArguments()).time;
-        viewModelFactory = EndViewModelFactory(time);
+        val ganador = EndFragmentArgs.fromBundle(requireArguments()).ganador;
+        viewModelFactory = EndViewModelFactory(time, ganador);
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(EndViewModel::class.java)
 
         binding.viewModel = viewModel;
         binding.lifecycleOwner = viewLifecycleOwner;
+
+
+        viewModel.eventPlayAgain.observe(viewLifecycleOwner, {
+                playAgain -> if(playAgain){
+            findNavController().navigate(EndFragmentDirections.actionEndFragmentToGameFragment());
+            viewModel.onPlayAgainComplete();
+        }
+        })
+
+
 
         return binding.root
 

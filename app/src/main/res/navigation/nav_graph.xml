@@ -12,8 +12,8 @@
         <action
             android:id="@+id/action_startFragment_to_gameFragment"
             app:destination="@id/gameFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -23,7 +23,10 @@
             android:id="@+id/action_gameFragment_to_endFragment"
             app:destination="@id/endFragment"
             app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/startFragment" />
     </fragment>
     <fragment
         android:id="@+id/endFragment"
@@ -35,5 +38,14 @@
             android:name="time"
             app:argType="long"
             android:defaultValue="0L" />
+        <argument
+            android:name="ganador"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_endFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>

@@ -342,8 +342,10 @@ class GameFragment : Fragment() {
             if (tablero[posicion[0]] == tablero[posicion[1]] && tablero[posicion[1]] == tablero[posicion[2]] && tablero[posicion[0]] != 0) {
                 if (tablero[posicion[0]] == PLAYER){
                     Toast.makeText(context, "HA GANADO EL JUGADOR", Toast.LENGTH_LONG).show();
+                    viewModel.setGanador(1);
                 } else if (tablero[posicion[0]] == IA){
                     Toast.makeText(context, "HA GANADO LA MAQUINA", Toast.LENGTH_LONG).show();
+                    viewModel.setGanador(2);
                 }
                 terminado = true
             }
@@ -356,6 +358,7 @@ class GameFragment : Fragment() {
         }
         if(!cero){
             Toast.makeText(context, "HA SIDO EMPATE", Toast.LENGTH_LONG).show();
+            viewModel.setGanador(3);
             terminado = true;
         }
         if(terminado){
@@ -373,9 +376,10 @@ class GameFragment : Fragment() {
     }
 
     fun gameFinished(){
-        Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "FIN DE LA PARTIDA", Toast.LENGTH_SHORT).show()
         val action = GameFragmentDirections.actionGameFragmentToEndFragment()
         action.time = viewModel.currentTime.value ?: 0;
+        action.ganador = viewModel.ganador.value ?: 0;
         NavHostFragment.findNavController(this).navigate(action)
         viewModel.onGameFinishComplete();
     }
