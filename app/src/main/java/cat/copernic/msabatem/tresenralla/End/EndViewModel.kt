@@ -1,8 +1,12 @@
 package cat.copernic.msabatem.tresenralla
 
 import android.app.Application
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.provider.SyncStateContract.Helpers.insert
 import android.text.format.DateUtils
+import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.lifecycle.*
 import cat.copernic.msabatem.tresenralla.Database.TicTacToeDatabase
 import cat.copernic.msabatem.tresenralla.Database.TicTacToeDatabaseDao
@@ -15,6 +19,7 @@ class EndViewModel(
     ganador: Int): ViewModel() {
 
     private val database = database;
+    private val aplication = aplication;
 
     private val _tiempo = MutableLiveData<Long>(time);
     val tiempo: LiveData<Long> = _tiempo;
@@ -71,6 +76,11 @@ class EndViewModel(
     fun onVerHistorialComplete(){
         _verHistorial.value = false;
     }
+
+
+
+
+
 
 
 
