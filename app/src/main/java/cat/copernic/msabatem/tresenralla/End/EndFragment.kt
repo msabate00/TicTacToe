@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import cat.copernic.msabatem.tresenralla.Database.TicTacToeDatabase
 import cat.copernic.msabatem.tresenralla.databinding.FragmentEndBinding
 import cat.copernic.msabatem.tresenralla.databinding.FragmentGameBinding
 
@@ -31,7 +32,13 @@ class EndFragment : Fragment() {
         )
         val time = EndFragmentArgs.fromBundle(requireArguments()).time;
         val ganador = EndFragmentArgs.fromBundle(requireArguments()).ganador;
-        viewModelFactory = EndViewModelFactory(time, ganador);
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = TicTacToeDatabase.getInstance(application).ticTacToeDatabaseDao
+
+
+
+        viewModelFactory = EndViewModelFactory(dataSource,time, ganador, application);
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(EndViewModel::class.java)
 
@@ -39,11 +46,23 @@ class EndFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner;
 
 
+
+
+
+
+
         viewModel.eventPlayAgain.observe(viewLifecycleOwner, {
                 playAgain -> if(playAgain){
             findNavController().navigate(EndFragmentDirections.actionEndFragmentToGameFragment());
             viewModel.onPlayAgainComplete();
         }
+        })
+
+        viewModel.verHistorial.observe(viewLifecycleOwner,{
+            ver -> if (ver){
+                findNavController().navigate(EndFragmentDirections.actionEndFragmentToHistorialFragment());
+                viewModel.onVerHistorialComplete();
+            }
         })
 
 

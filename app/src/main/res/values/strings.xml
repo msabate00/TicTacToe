@@ -2,4 +2,14 @@
     <string name="app_name">TresEnRalla</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_entradas"><![CDATA[<h3>HISTORIAL DE PARTIDAS</h3>]]></string>
+    <string name="tiempo"><![CDATA[<b>Tiempo Restante: </b>]]></string>
+    <string name="ganador"><![CDATA[<b>Ganador: </b>]]></string>
+
+    <string name="ganador_TIMEOUT">Se acabo el tiempo</string>
+    <string name="ganador_IA">Ha ganado la Máquina</string>
+    <string name="ganador_PLAYER">Ha ganado el Jugador</string>
+    <string name="ganador_DRAW">Fue Empate</string>
+
+
 </resources>

@@ -37,6 +37,11 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToGameFragment())
             //findNavController().navigate()
         }
+
+        binding.btHistorialparidasstart.setOnClickListener {
+            findNavController().navigate(StartFragmentDirections.actionStartFragmentToHistorialFragment());
+        }
+
         return binding.root;
     }
 

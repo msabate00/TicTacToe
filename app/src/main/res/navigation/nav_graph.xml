@@ -14,6 +14,11 @@
             app:destination="@id/gameFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_startFragment_to_historialFragment"
+            app:destination="@id/historialFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -47,5 +52,14 @@
             app:destination="@id/gameFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_endFragment_to_historialFragment"
+            app:destination="@id/historialFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/historialFragment"
+        android:name="cat.copernic.msabatem.tresenralla.HistorialFragment"
+        android:label="HistorialFragment" />
 </navigation>

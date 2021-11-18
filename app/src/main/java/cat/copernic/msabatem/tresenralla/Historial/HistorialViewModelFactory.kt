@@ -5,16 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import cat.copernic.msabatem.tresenralla.Database.TicTacToeDatabaseDao
 
-
-class EndViewModelFactory(
+class HistorialViewModelFactory(
     private val dataSource: TicTacToeDatabaseDao,
-    private val time: Long,
-    private val ganador: Int,
     private val application: Application) : ViewModelProvider.Factory {
+    @Suppress("unchecked_cast")
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EndViewModel::class.java)) {
-            return EndViewModel(dataSource,application,time, ganador) as T
+        if (modelClass.isAssignableFrom(HistorialViewModel::class.java)) {
+            return HistorialViewModel(dataSource, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
