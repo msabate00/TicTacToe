@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
-import cat.copernic.msabatem.tresenralla.databinding.ActivityMainBinding
+import cat.copernic.msabatem.tresenralla.GameViewModel
 import cat.copernic.msabatem.tresenralla.databinding.FragmentGameBinding
 import kotlin.random.Random
 
@@ -76,9 +76,9 @@ class GameFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
         tablero = viewModel.tablero.value ?: Array<Int>(9){0};
-        terminado = viewModel.terminado.value ?: false;
+        /*terminado = viewModel.terminado.value ?: false;
         primer_turno = viewModel.primerturno.value ?: true;
-        playerTurno = viewModel.playerturno.value ?: true;
+        playerTurno = viewModel.playerturno.value ?: true;*/
         mostrar();
 
 
@@ -120,6 +120,19 @@ class GameFragment : Fragment() {
             }
         );
 
+        viewModel.turnoIA.observe(viewLifecycleOwner,
+            Observer {
+                if(it) turnoIA();
+            }
+        );
+
+        viewModel.comprovarGanador.observe(viewLifecycleOwner,
+                Observer {
+                    if (it) { comprobarGanador(); }
+                }
+        );
+
+
 
         return binding.root;
     }
@@ -130,13 +143,13 @@ class GameFragment : Fragment() {
 
         //findViewById<Button>(R.id.b1);
 
-        for(i in buttons){
+        /*for(i in buttons){
             i.setOnClickListener{
-                pulsacion(it);
+                //pulsacion(it);
             };
 
 
-        }
+        }*/
 
 
     }
@@ -164,12 +177,16 @@ class GameFragment : Fragment() {
         mostrar();
     }*/
 
-    fun pulsacion(view: View) {
+    /*fun pulsacion(view: View) {
 
         Log.i("bucle",terminado.toString() + " _ " + viewModel.terminado.value.toString());
         if (playerTurno) {
 
             if(!terminado) {
+
+
+
+
                 var contador = 0;
                 for (i in buttons) {
                     // Log.i("Bucle", contador.toString())
@@ -199,10 +216,11 @@ class GameFragment : Fragment() {
         }
 
         //turnoIA();
-    }
+    }*/
 
     fun turnoIA(){
         var puesto: Boolean = false;
+        tablero = viewModel.tablero.value ?: Array<Int>(9){0};
 
         fun atacar(){
 
@@ -327,16 +345,20 @@ class GameFragment : Fragment() {
                 }
             }
         }
-        comprobarGanador();
+        viewModel.onComprovarGanador();
+        //comprobarGanador();
 
         if(!terminado) {
-            playerTurno = true;
+
+            viewModel.onPlayIAComplete();
+            //playerTurno = true;
             viewModel.playerTurno(true);
         }
     }
 
 
     fun comprobarGanador(){
+
 
         for (posicion in combinacionGanadora) {
             if (tablero[posicion[0]] == tablero[posicion[1]] && tablero[posicion[1]] == tablero[posicion[2]] && tablero[posicion[0]] != 0) {
@@ -348,6 +370,7 @@ class GameFragment : Fragment() {
                     viewModel.setGanador(2);
                 }
                 terminado = true
+                viewModel.setTerminado(true);
             }
         }
         var cero = false;
@@ -360,6 +383,7 @@ class GameFragment : Fragment() {
             Toast.makeText(context, "HA SIDO EMPATE", Toast.LENGTH_LONG).show();
             viewModel.setGanador(3);
             terminado = true;
+            viewModel.setTerminado(true);
         }
         if(terminado){
             gameFinished();
@@ -368,12 +392,12 @@ class GameFragment : Fragment() {
 
         //return terminado;
 
+        viewModel.onComprovarGanadorComplete();
+
     }
 
 
-    fun debug(a: Any){
-        Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show();
-    }
+
 
     fun gameFinished(){
         Toast.makeText(activity, "FIN DE LA PARTIDA", Toast.LENGTH_SHORT).show()

@@ -1,4 +1,4 @@
-package cat.copernic.msabatem.tresenralla
+package cat.copernic.msabatem.tresenralla.Historial
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import cat.copernic.msabatem.tresenralla.Database.TicTacToeDatabase
+import cat.copernic.msabatem.tresenralla.HistorialViewModel
+import cat.copernic.msabatem.tresenralla.HistorialViewModelFactory
+import cat.copernic.msabatem.tresenralla.R
 import cat.copernic.msabatem.tresenralla.databinding.FragmentHistorialBinding
 
 
@@ -37,6 +40,20 @@ class HistorialFragment : Fragment() {
 
         binding.viewModel = viewModel;
         binding.lifecycleOwner = viewLifecycleOwner;
+
+
+        val adapter = HistorialEntradaAdapter()
+        binding.entradaList.adapter = adapter;
+
+
+
+
+        viewModel.entradas.observe(viewLifecycleOwner, {
+            it?.let {
+                adapter.data = it;
+            }
+        })
+
 
         return binding.root
 

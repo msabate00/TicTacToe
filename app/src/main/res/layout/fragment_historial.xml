@@ -13,23 +13,25 @@
         android:id="@+id/frameLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HistorialFragment">
+        tools:context=".Historial.HistorialFragment">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/entrada_list"
+            android:layout_width="412dp"
+            android:layout_height="674dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvhistorialentradas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.entradasString}"
-                />
-        </ScrollView>
+        <Button
+            android:id="@+id/bt_borrarDatos"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:onClick="@{() -> viewModel.clearAll()}"
+            android:text="Borrar Datos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,7 +13,7 @@ class HistorialViewModel(
         application: Application
     ) : AndroidViewModel(application) {
     private var entrada = MutableLiveData<HistorialEntrada?>()
-    private val entradas = database.getAll()
+    val entradas = database.getAll()
     var entradasString = Transformations.map(entradas) { entradas ->
         formatEntradas(entradas, application.resources)
     }
@@ -36,6 +36,16 @@ class HistorialViewModel(
     private suspend fun getEntradaFromDatabase(): HistorialEntrada? {
         var entrada = database.getLast()
         return entrada;
+    }
+
+    fun clearAll(){
+        viewModelScope.launch {
+            clear();
+        }
+    }
+
+    private suspend fun clear(){
+        database.clear();
     }
 
 

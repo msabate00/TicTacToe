@@ -60,6 +60,6 @@
     </fragment>
     <fragment
         android:id="@+id/historialFragment"
-        android:name="cat.copernic.msabatem.tresenralla.HistorialFragment"
+        android:name="cat.copernic.msabatem.tresenralla.Historial.HistorialFragment"
         android:label="HistorialFragment" />
 </navigation>
