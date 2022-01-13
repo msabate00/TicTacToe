@@ -28,6 +28,10 @@ class GameViewModel : ViewModel() {
     var playerturno: LiveData<Boolean> = _playerturno;
 
 
+    var ia_icon: Int = R.drawable.ia_icon;
+    var player_icon: Int = R.drawable.player_icon
+
+
     private val _eventGameFinish = MutableLiveData<Boolean>(false);
     val eventGameFinish: LiveData<Boolean> = _eventGameFinish;
 
@@ -52,6 +56,9 @@ class GameViewModel : ViewModel() {
     private val timer: CountDownTimer;
 
     init {
+
+
+
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
             override fun onTick(millisUntilFinished: Long) {
                 _currentTime.value = millisUntilFinished/ ONE_SECOND;
@@ -139,7 +146,7 @@ class GameViewModel : ViewModel() {
 
                 if(tablero.value?.get(posi) ?: 0 == 0){
                     tablero.value?.set(posi,PLAYER);
-                    view.setBackgroundResource(R.drawable.player_icon);
+                    view.setBackgroundResource(player_icon);
                     _playerturno.value = false;
                 }
 

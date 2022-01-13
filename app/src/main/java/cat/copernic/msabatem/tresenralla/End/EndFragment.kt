@@ -69,8 +69,8 @@ class EndFragment : Fragment() {
         when(viewModel.ganador.value){
 
             0 -> binding.imageView.setImageResource(R.drawable.notime_icon);
-            1 -> binding.imageView.setImageResource(R.drawable.player_icon);
-            2 -> binding.imageView.setImageResource(R.drawable.ia_icon);
+            1 -> binding.imageView.setImageResource((activity as MainActivity).player_icon);
+            2 -> binding.imageView.setImageResource((activity as MainActivity).ia_icon);
             3 -> binding.imageView.setImageResource(R.drawable.draw_icon);
             else -> binding.imageView.setImageResource(R.drawable.notime_icon);
         }

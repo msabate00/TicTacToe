@@ -13,10 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import cat.copernic.msabatem.tresenralla.databinding.ActivityMainBinding
 import kotlin.random.Random
-import android.content.SharedPreferences
-
-
-
+import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +30,10 @@ class MainActivity : AppCompatActivity() {
     var playerTurno = true;
     var terminado = false;
     var primer_turno = true;
+
+
+    var player_icon = R.drawable.player_icon;
+    var ia_icon = R.drawable.ia_icon;
 
 
     val combinacionGanadora = arrayOf(
@@ -135,21 +136,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val sharedp = getSharedPreferences("cat.copernic.msabatem.tresenralla_preferences", MODE_PRIVATE);
 
-       if(getSharedPreferences("cat.copernic.msabatem.tresenralla_preferences", MODE_PRIVATE).getBoolean("darkmode", false)){
+       if(sharedp.getBoolean("darkmode", false)){
            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
        }else{
            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
        }
+       if(sharedp.getBoolean("invertir_iconos", false)){
+           player_icon = R.drawable.ia_icon
+           ia_icon = R.drawable.player_icon
+       }else{
+           player_icon = R.drawable.player_icon;
+           ia_icon = R.drawable.ia_icon;
+       }
+
     }
 
     fun mostrar(){
         for(i in 0..8){
 
             if(tablero[i] == PLAYER){
-                buttons[i].setBackgroundResource(R.drawable.player_icon);
+                buttons[i].setBackgroundResource(player_icon);
             }else if (tablero[i] == IA){
-                buttons[i].setBackgroundResource(R.drawable.ia_icon);
+                buttons[i].setBackgroundResource(ia_icon);
             }else{
                 buttons[i].setBackgroundResource(R.drawable.none);
             }
@@ -176,7 +186,7 @@ class MainActivity : AppCompatActivity() {
                 for (i in buttons) {
                     // Log.i("Bucle", contador.toString())
                     if (i == view && tablero[contador] == 0) {
-                        view.setBackgroundResource(R.drawable.player_icon);
+                        view.setBackgroundResource(player_icon);
                         tablero[contador] = PLAYER;
                         playerTurno = false;
                         viewModel.playerTurno(false);
@@ -220,7 +230,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[2]] = IA
-                    buttons[posicion[2]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[2]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA PRIMERA Y TERCERA COMO JUGADOR
@@ -230,7 +240,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[1]] = IA
-                    buttons[posicion[1]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[1]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA SEGUNDA Y TERCERA COMO JUGADOR
@@ -240,7 +250,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[0]] = IA
-                    buttons[posicion[0]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[0]].setBackgroundResource(ia_icon);
                     break;
                 }
             }
@@ -256,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[2]] = IA
-                    buttons[posicion[2]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[2]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA PRIMERA Y TERCERA COMO JUGADOR
@@ -266,7 +276,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[1]] = IA
-                    buttons[posicion[1]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[1]].setBackgroundResource(ia_icon);
                     break;
 
 
@@ -277,7 +287,7 @@ class MainActivity : AppCompatActivity() {
                 ){
                     puesto = true;
                     tablero[posicion[0]] = IA
-                    buttons[posicion[0]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[0]].setBackgroundResource(ia_icon);
                     break;
 
                 }
@@ -292,7 +302,7 @@ class MainActivity : AppCompatActivity() {
                     val r = Random.nextInt(0,4);
                     Log.i("bucle",r.toString() + " __ " + esquinas[r])
                     tablero[esquinas[r]] = IA;
-                    buttons[esquinas[r]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[esquinas[r]].setBackgroundResource(ia_icon);
                     puesto = true;
                     primer_turno = false;
                     viewModel.primerturno(false);
@@ -300,7 +310,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }else{
                 tablero[4] = IA;
-                buttons[4].setBackgroundResource(R.drawable.ia_icon);
+                buttons[4].setBackgroundResource(ia_icon);
                 puesto = true;
                 primer_turno = false;
                 viewModel.primerturno(false);
@@ -323,7 +333,7 @@ class MainActivity : AppCompatActivity() {
                 val r = Random.nextInt(0, 8)
                 if(tablero[r] == 0){
                     tablero[r] = IA;
-                    buttons[r].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[r].setBackgroundResource(ia_icon);
                     puesto = true;
                     break;
                 }

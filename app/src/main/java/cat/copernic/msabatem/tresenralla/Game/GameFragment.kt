@@ -31,8 +31,10 @@ class GameFragment : Fragment() {
     var terminado = false;
     var primer_turno = true;
 
-    var ia_icon = R.drawable.ia_icon;
-    var player_icon = R.drawable.player_icon;
+
+
+    var ia_icon: Int = R.drawable.ia_icon;
+    var player_icon: Int = R.drawable.player_icon
 
 
     val combinacionGanadora = arrayOf(
@@ -55,6 +57,14 @@ class GameFragment : Fragment() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         //binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+
+        player_icon = (activity as MainActivity).player_icon;
+        ia_icon = (activity as MainActivity).ia_icon;
+        viewModel.ia_icon = ia_icon;
+        viewModel.player_icon = player_icon;
+
+
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_game,
@@ -161,9 +171,9 @@ class GameFragment : Fragment() {
         for(i in 0..8){
 
             if(tablero[i] == PLAYER){
-                buttons[i].setBackgroundResource(R.drawable.player_icon);
+                buttons[i].setBackgroundResource(player_icon);
             }else if (tablero[i] == IA){
-                buttons[i].setBackgroundResource(R.drawable.ia_icon);
+                buttons[i].setBackgroundResource(ia_icon);
             }else{
                 buttons[i].setBackgroundResource(R.drawable.none);
             }
@@ -194,7 +204,7 @@ class GameFragment : Fragment() {
                 for (i in buttons) {
                     // Log.i("Bucle", contador.toString())
                     if (i == view && tablero[contador] == 0) {
-                        view.setBackgroundResource(R.drawable.player_icon);
+                        view.setBackgroundResource(player_icon);
                         tablero[contador] = PLAYER;
                         playerTurno = false;
                         viewModel.playerTurno(false);
@@ -239,7 +249,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[2]] = IA
-                    buttons[posicion[2]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[2]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA PRIMERA Y TERCERA COMO JUGADOR
@@ -249,7 +259,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[1]] = IA
-                    buttons[posicion[1]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[1]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA SEGUNDA Y TERCERA COMO JUGADOR
@@ -259,7 +269,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[0]] = IA
-                    buttons[posicion[0]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[0]].setBackgroundResource(ia_icon);
                     break;
                 }
             }
@@ -275,7 +285,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[2]] = IA
-                    buttons[posicion[2]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[2]].setBackgroundResource(ia_icon);
                     break;
 
                     //CON LA PRIMERA Y TERCERA COMO JUGADOR
@@ -285,7 +295,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[1]] = IA
-                    buttons[posicion[1]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[1]].setBackgroundResource(ia_icon);
                     break;
 
 
@@ -296,7 +306,7 @@ class GameFragment : Fragment() {
                 ){
                     puesto = true;
                     tablero[posicion[0]] = IA
-                    buttons[posicion[0]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[posicion[0]].setBackgroundResource(ia_icon);
                     break;
 
                 }
@@ -311,7 +321,7 @@ class GameFragment : Fragment() {
                     val r = Random.nextInt(0,4);
                     Log.i("bucle",r.toString() + " __ " + esquinas[r])
                     tablero[esquinas[r]] = IA;
-                    buttons[esquinas[r]].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[esquinas[r]].setBackgroundResource(ia_icon);
                     puesto = true;
                     primer_turno = false;
                     viewModel.primerturno(false);
@@ -319,7 +329,7 @@ class GameFragment : Fragment() {
                 }
             }else{
                 tablero[4] = IA;
-                buttons[4].setBackgroundResource(R.drawable.ia_icon);
+                buttons[4].setBackgroundResource(ia_icon);
                 puesto = true;
                 primer_turno = false;
                 viewModel.primerturno(false);
@@ -342,7 +352,7 @@ class GameFragment : Fragment() {
                 val r = Random.nextInt(0, 8)
                 if(tablero[r] == 0){
                     tablero[r] = IA;
-                    buttons[r].setBackgroundResource(R.drawable.ia_icon);
+                    buttons[r].setBackgroundResource(ia_icon);
                     puesto = true;
                     break;
                 }

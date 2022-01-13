@@ -2,7 +2,6 @@ package cat.copernic.msabatem.tresenralla.Settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import cat.copernic.msabatem.tresenralla.MainActivity
 import cat.copernic.msabatem.tresenralla.R
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -39,12 +39,37 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if(key == "darkmode"){
+
+        when(key){
+
+            "darkmode" -> {
+                when (sharedPreferences?.getBoolean(key, false)){
+                    true -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+                    false -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+                }
+            }
+            "invertir_iconos" -> {
+                when (sharedPreferences?.getBoolean(key, false)){
+                    true -> {
+                        (activity as MainActivity).player_icon = R.drawable.ia_icon;
+                        (activity as MainActivity).ia_icon = R.drawable.player_icon;
+                    }
+
+                    false -> {
+                        (activity as MainActivity).player_icon = R.drawable.player_icon;
+                        (activity as MainActivity).ia_icon = R.drawable.ia_icon;
+                    }
+                }
+            }
+
+        }
+
+        /*if(key == "darkmode"){
             when (sharedPreferences?.getBoolean(key, false)){
                 true -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
                 false -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
             }
-        }
+        }*/
 
       //Log.d("HELP", "${sharedPreferences?.getBoolean(key, false)}")
     }
