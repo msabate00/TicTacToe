@@ -11,19 +11,19 @@ import cat.copernic.msabatem.tresenralla.HistorialEntrada
 interface TicTacToeDatabaseDao {
 
     @Insert
-    suspend fun insert(entrada: HistorialEntrada)
+    fun insert(entrada: HistorialEntrada)
 
     @Update
-    suspend fun update(entrada: HistorialEntrada)
+    fun update(entrada: HistorialEntrada)
 
     @Query("SELECT * from historial_table WHERE entradaID = :key")
-    suspend fun get(key: Long): HistorialEntrada?
+    fun get(key: Long): HistorialEntrada?
 
     @Query("DELETE FROM historial_table")
-    suspend fun clear()
+    fun clear()
 
     @Query("SELECT * FROM historial_table ORDER BY entradaID DESC LIMIT 1")
-    suspend fun getLast(): HistorialEntrada?
+    fun getLast(): HistorialEntrada?
 
     @Query("SELECT * FROM historial_table ORDER BY entradaID DESC")
     fun getAll(): LiveData<List<HistorialEntrada>>

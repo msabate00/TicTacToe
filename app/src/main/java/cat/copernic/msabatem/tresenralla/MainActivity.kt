@@ -5,11 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import cat.copernic.msabatem.tresenralla.databinding.ActivityMainBinding
 import kotlin.random.Random
+import android.content.SharedPreferences
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -102,7 +109,9 @@ class MainActivity : AppCompatActivity() {
             }
         );
 
-
+        Log.i("AYUDA", "HEY");
+        //AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+        //AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
 
     }
 
@@ -121,6 +130,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+       if(getSharedPreferences("cat.copernic.msabatem.tresenralla_preferences", MODE_PRIVATE).getBoolean("darkmode", false)){
+           AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+       }else{
+           AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+       }
     }
 
     fun mostrar(){

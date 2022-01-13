@@ -42,6 +42,10 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHistorialFragment());
         }
 
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(StartFragmentDirections.actionStartFragmentToSettingsFragment())
+        }
+
         return binding.root;
     }
 

@@ -59,7 +59,7 @@ class EndViewModel(
         }
     }
     private suspend fun insert(entrada: HistorialEntrada) {
-        database.insert(entrada);
+       // database.insert(entrada);
     }
 
 

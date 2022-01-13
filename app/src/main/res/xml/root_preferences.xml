@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="Style">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:title="Modo Oscuro"
+            app:key="darkmode" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="invertir_iconos"
+            android:title="Invertir Iconos" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

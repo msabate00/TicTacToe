@@ -31,6 +31,9 @@ class GameFragment : Fragment() {
     var terminado = false;
     var primer_turno = true;
 
+    var ia_icon = R.drawable.ia_icon;
+    var player_icon = R.drawable.player_icon;
+
 
     val combinacionGanadora = arrayOf(
         intArrayOf(0, 1, 2),
