@@ -1,6 +1,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="Game Data">
+
+        <EditTextPreference
+            android:defaultValue="Jugador"
+            android:key="player_name"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:title="Jugador"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:defaultValue="Máquina"
+            android:key="maquina_name"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:title="Máquina"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="Style">
 
         <SwitchPreference

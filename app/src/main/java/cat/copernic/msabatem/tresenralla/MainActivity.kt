@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     var player_icon = R.drawable.player_icon;
     var ia_icon = R.drawable.ia_icon;
 
+    var player_name = "Jugador";
+    var ia_name= "Máquina";
+
 
     val combinacionGanadora = arrayOf(
         intArrayOf(0, 1, 2),
@@ -150,6 +153,8 @@ class MainActivity : AppCompatActivity() {
            player_icon = R.drawable.player_icon;
            ia_icon = R.drawable.ia_icon;
        }
+        player_name = sharedp.getString("player_name", "Jugador") ?: "Jugador";
+        ia_name = sharedp.getString("maquina_name", "Máquina") ?: "Máquina";
 
     }
 

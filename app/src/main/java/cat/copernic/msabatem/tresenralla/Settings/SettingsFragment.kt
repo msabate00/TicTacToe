@@ -64,6 +64,10 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
         }
 
+        (activity as MainActivity).ia_name = sharedPreferences?.getString("maquina_name", "Máquina") ?: "Máquina";
+        (activity as MainActivity).player_name = sharedPreferences?.getString("player_name", "Jugador") ?: "Jugador";
+
+
         /*if(key == "darkmode"){
             when (sharedPreferences?.getBoolean(key, false)){
                 true -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);

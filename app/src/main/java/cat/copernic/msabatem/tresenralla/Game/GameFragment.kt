@@ -36,6 +36,9 @@ class GameFragment : Fragment() {
     var ia_icon: Int = R.drawable.ia_icon;
     var player_icon: Int = R.drawable.player_icon
 
+    var player_name = "Jugador";
+    var maquina_name = "Máquina";
+
 
     val combinacionGanadora = arrayOf(
         intArrayOf(0, 1, 2),
@@ -61,6 +64,12 @@ class GameFragment : Fragment() {
 
         player_icon = (activity as MainActivity).player_icon;
         ia_icon = (activity as MainActivity).ia_icon;
+
+
+        player_name = (activity as MainActivity).player_name;
+        maquina_name = (activity as MainActivity).ia_name;
+
+
         viewModel.ia_icon = ia_icon;
         viewModel.player_icon = player_icon;
 
@@ -71,6 +80,11 @@ class GameFragment : Fragment() {
             container,
             false
         )
+
+        binding.ivJugadorIcono.setImageResource(player_icon);
+        binding.ivMaquinaIcono.setImageResource(ia_icon);
+        binding.tvJugadorName.text = player_name;
+        binding.tvMaquinaName.text = maquina_name;
 
         buttons = arrayOf(
             binding.b1,

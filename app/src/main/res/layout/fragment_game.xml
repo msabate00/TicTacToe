@@ -149,5 +149,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/b2" />
 
+        <TextView
+            android:id="@+id/tvJugadorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Jugador"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/b7" />
+
+        <ImageView
+            android:id="@+id/ivJugadorIcono"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvJugadorName"
+            app:layout_constraintStart_toStartOf="@+id/tvJugadorName"
+            app:layout_constraintTop_toBottomOf="@+id/tvJugadorName"
+            app:srcCompat="@drawable/player_icon" />
+
+        <TextView
+            android:id="@+id/tvMaquinaName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Máquina"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/b9" />
+
+        <ImageView
+            android:id="@+id/ivMaquinaIcono"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvMaquinaName"
+            app:layout_constraintStart_toStartOf="@+id/tvMaquinaName"
+            app:layout_constraintTop_toBottomOf="@+id/tvMaquinaName"
+            app:srcCompat="@drawable/ia_icon" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
